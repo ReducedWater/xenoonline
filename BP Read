@@ -1,0 +1,130 @@
+-- Version: 10
+
+-- Instances:
+
+local BPShit = Instance.new("ScreenGui")
+local FrameA = Instance.new("Frame")
+local FrameTargetName = Instance.new("Frame")
+local TargetNameTextBox = Instance.new("TextBox")
+local UIGradient = Instance.new("UIGradient")
+local BPShitText = Instance.new("TextLabel")
+local GravityShitText = Instance.new("TextLabel")
+local UIGradient_2 = Instance.new("UIGradient")
+local targetname = game.Players.LocalPlayer.Name
+local startinguser = targetname
+
+
+--Properties:
+
+print("hmmm")
+BPShit.Name = "BPShit"
+if game.Players.LocalPlayer:WaitForChild("PlayerGui"):FindFirstChild("BPShit") then
+    game.Players.LocalPlayer:WaitForChild("PlayerGui"):FindFirstChild("BPShit"):Destroy()
+end
+BPShit.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+FrameA.Name = "FrameA"
+FrameA.Parent = BPShit
+FrameA.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+FrameA.BorderSizePixel = 0
+FrameA.Position = UDim2.new(-0.000300724234, 0, 0.82305336, 0)
+FrameA.Size = UDim2.new(0.282404602, 0, 0.0368099585, 0)
+
+
+FrameTargetName.Name = "FrameTargetName"
+FrameTargetName.Parent = BPShit
+FrameTargetName.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+FrameTargetName.BorderSizePixel = 0
+FrameTargetName.Position = UDim2.new(-0.000300724234, 0, 0.78, 0)
+FrameTargetName.Size = UDim2.new(0.282404602, 0, 0.0368099585, 0)
+
+TargetNameTextBox.Parent = FrameTargetName
+TargetNameTextBox.Size = UDim2.new(1,0,1,0)
+TargetNameTextBox.BackgroundTransparency = 1
+TargetNameTextBox.Text = targetname
+
+UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(38, 255, 23)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(38, 255, 23))}
+UIGradient.Transparency = NumberSequence.new{NumberSequenceKeypoint.new(0.00, 0.48), NumberSequenceKeypoint.new(0.89, 0.89), NumberSequenceKeypoint.new(1.00, 1.00)}
+UIGradient.Parent = FrameA
+
+SecondUIGradient = UIGradient:Clone()
+SecondUIGradient.Parent = FrameTargetName
+
+BPShitText.Name = "BPShitText"
+BPShitText.Parent = FrameA
+BPShitText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+BPShitText.BackgroundTransparency = 1.000
+BPShitText.Position = UDim2.new(-0.000307433307, 0, 0.119620487, 0)
+BPShitText.Selectable = true
+BPShitText.Size = UDim2.new(0, 424, 0, 23)
+BPShitText.Font = Enum.Font.SourceSansBold
+BPShitText.Text = "BattlePower: 0"
+BPShitText.TextColor3 = Color3.fromRGB(255, 255, 255)
+BPShitText.TextScaled = true
+BPShitText.TextSize = 14.000
+BPShitText.TextStrokeTransparency = 0.600
+BPShitText.TextWrapped = true
+
+
+GravityShitText.Name = "GravityShitText"
+GravityShitText.Parent = FrameA
+GravityShitText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+GravityShitText.BackgroundTransparency = 1.000
+GravityShitText.Position = UDim2.new(0.4, 0, 0.119620487, 0)
+GravityShitText.Selectable = true
+GravityShitText.Size = UDim2.new(0, 424, 0, 23)
+GravityShitText.Font = Enum.Font.SourceSansBold
+GravityShitText.Text = "Gravity Pressure: 0"
+GravityShitText.TextColor3 = Color3.fromRGB(255, 255, 255)
+GravityShitText.TextScaled = true
+GravityShitText.TextSize = 14.000
+GravityShitText.TextStrokeTransparency = 0.600
+GravityShitText.TextWrapped = true
+
+UIGradient_2.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(0.17, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(0.58, Color3.fromRGB(230, 230, 230)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(175, 175, 175))}
+UIGradient_2.Rotation = 90
+UIGradient_2.Parent = BPShitText
+
+-- Scripts:
+
+local function WZYDOYK_fake_script() -- BPShitText.BPShitScript
+local script = Instance.new('LocalScript', BPShitText)
+local failusercounter = 0
+
+game.Workspace:FindFirstChild(targetname).Config.BattlePower.Changed:Connect(function()
+    script.Parent.Text = "BattlePower: "..game.Workspace:FindFirstChild(targetname).Config.BattlePower.Value --
+end)
+
+game.Workspace:FindFirstChild(targetname).Config.SpeedDebuff.Changed:Connect(function()
+    GravityShitText.Text = "Gravity Pressure: "..game.Workspace:FindFirstChild(targetname).Config.SpeedDebuff.Value
+end)
+
+while wait(1) do
+    targetname = TargetNameTextBox.Text
+    if not game.Workspace:FindFirstChild(targetname) then
+         targetname = startinguser
+         failusercounter = failusercounter + 1
+            if failusercounter >= 15 then
+                TargetNameTextBox.Text = startinguser
+            end
+        else
+            failusercounter = 0
+             script.Parent.Text = "BattlePower: "..game.Workspace:FindFirstChild(targetname).Config.BattlePower.Value --
+    end
+    
+    for i,v in pairs(game.Players:GetChildren()) do
+	    if v.Character:FindFirstChild("Humanoid") then
+	        v.Character.Humanoid.DisplayDistanceType = Enum.HumanoidDisplayDistanceType.Viewer
+        end
+        if v.Character:FindFirstChild("HumanoidRootPart") then
+        	for d,p in pairs(v.Character.HumanoidRootPart:GetChildren()) do
+    	        if p and p.Name == "PLIndicator" and p:FindFirstChild("Amount") then
+                     p.Amount.Text = v.Character.Config.BattlePower.Value
+                end
+    	    end
+        end
+        
+    end
+end
+end
+coroutine.wrap(WZYDOYK_fake_script)()
